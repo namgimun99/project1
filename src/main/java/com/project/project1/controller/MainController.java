@@ -13,4 +13,10 @@ public class MainController {
         return "hi";
     }
 
+    @GetMapping("/admin")
+    @ResponseBody
+    public String adminPage() {
+        return "admin";
+    }
+
 }

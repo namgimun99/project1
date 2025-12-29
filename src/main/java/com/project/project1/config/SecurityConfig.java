@@ -6,20 +6,32 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 
+import static org.springframework.security.config.Customizer.withDefaults;
+
 @Configuration
-@EnableWebSecurity
 public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        // Spring Security 5버전 이하
+//       http
+//                .csrf().disable()
+//                .authorizeHttpRequests()
+//                .requestMatchers("/public/**").permitAll()
+//                .requestMatchers("/admin/**").hasRole("ADMIN")
+//                .anyRequest().authenticated()
+//                .and()
+//                .formLogin();
+
+        // Spring Security 6.1 버전 이후
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .anyRequest().permitAll()
+                        .requestMatchers("/public/**").permitAll()
+                        .requestMatchers("/admin/**").hasRole("ADMIN")
+                        .anyRequest().authenticated()
                 )
-                .formLogin(form -> form.disable())
-                .httpBasic(basic -> basic.disable());
-
+                .formLogin(withDefaults()); // 기본 로그인 폼
         return http.build();
     }
 }
