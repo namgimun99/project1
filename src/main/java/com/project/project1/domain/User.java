@@ -2,6 +2,7 @@ package com.project.project1.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDateTime;
 
@@ -15,9 +16,8 @@ public class User {
     @Id
     @GeneratedValue //AutoIncrement
     private Long id;
-    private String loginId;
+    private String username;
     private String password;
-    private String name;
     private String email;
     private LocalDateTime createTime;
     private LocalDateTime modifyTime;
@@ -32,4 +32,9 @@ public class User {
     protected void onUpdate() {
         this.modifyTime = LocalDateTime.now();
     }
+
+    public void encodePassword(PasswordEncoder passwordEncoder) {
+        this.password = passwordEncoder.encode(this.password);
+    }
+
 }
