@@ -12,14 +12,21 @@ import java.time.LocalDateTime;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Builder
+@EqualsAndHashCode(of = "id")
 public class User {
     @Id
     @GeneratedValue //AutoIncrement
+    @Column
     private Long id;
+    @Column
     private String username;
+    @Column
     private String password;
+    @Column
     private String email;
+    @Column
     private LocalDateTime createTime;
+    @Column
     private LocalDateTime modifyTime;
 
     @PrePersist

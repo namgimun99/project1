@@ -1,6 +1,7 @@
 package com.project.project1.config;
 
 import com.project.project1.domain.User;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
@@ -10,6 +11,7 @@ import java.util.Collection;
 import java.util.List;
 
 @RequiredArgsConstructor
+@EqualsAndHashCode(of = "user")
 public class CustomUserLogin implements UserDetails {
 
     private final User user;
