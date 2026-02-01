@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class MainController {
 
-    @GetMapping("/main")
+    @GetMapping("/home")
     @ResponseBody
     public String mainPage() {
         return "hi";
